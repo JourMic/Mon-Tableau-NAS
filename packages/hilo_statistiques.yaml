@@ -1,0 +1,19 @@
+# Hilo
+
+template:
+  - sensor:
+      - name: "Tarif quotidien normal"
+        unit_of_measurement: "kWh"
+        unique_id: "tarif_quotidien_normal"
+        icon: mdi:power-socket-us
+        state: "{{ states('sensor.hilo_energy_total_low') }}"
+        device_class: energy
+        state_class: total_increasing
+
+      - name: "Tarif quotidien élevé"
+        unit_of_measurement: "kWh"
+        unique_id: "tarif_quotidien_eleve"
+        icon: mdi:power-socket-us
+        state: "{{ states('sensor.hilo_energy_total_medium') }}"
+        device_class: energy
+        state_class: total_increasing

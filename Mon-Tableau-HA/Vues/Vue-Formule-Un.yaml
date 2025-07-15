@@ -1,0 +1,265 @@
+title: F1
+path: Vue-f1
+icon: mdi:flag-checkered
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading: Prochaine course
+        heading_style: title
+        icon: mdi:flag-checkered
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:layout-card
+              layout_type: custom:grid-layout
+              cards:
+                - type: custom:formulaone-card
+                  view_layout:
+                    grid-area: formule1
+                  card_type: countdown
+                  show_raceinfo: true
+                  f1_font: true
+                  only_show_date: true
+                  show_refresh: true
+                  translations:
+                    days: j
+                    hours': h
+                    minutes': m
+                    seconds': s
+                    date: Date
+                    practice1: Libres 1
+                    practice2: Libres 2
+                    practice3: Libres 3
+                    round: Course
+                    race: Course
+                    racename: Nom
+                    circuitname: Piste
+                    location: Endroit
+                    city: Ville
+                    racetime: Course
+                    sprint: Sprint
+                    qualifying: Qualifications
+                    endofseason: Saison terminée
+                  hide_tracklayout: false
+                  location_clickable: false
+                  hide_racedatetimes: false
+                  show_weather: false
+                  show_lastyears_result: true
+              layout:
+                grid-template-columns: 1fr
+                grid-auto-flow: row
+                grid-template-areas: |
+                  "formule1"
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: full
+    column_span: 1
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Résultats
+        heading_style: title
+        icon: mdi:flag-outline
+      - type: custom:tabbed-card
+        styles:
+          "--mdc-theme-primary": red
+          "--mdc-tab-text-label-color-default": yellow
+        options: {}
+        card_mod:
+          class: middle-contained
+        tabs:
+          - card:
+              type: custom:button-card
+              template: frame
+              padding-bottom: 1px
+              custom_fields:
+                buttons:
+                  card:
+                    type: custom:layout-card
+                    layout_type: custom:grid-layout
+                    cards:
+                      - type: custom:formulaone-card
+                        view_layout:
+                          grid-area: formule3
+                        card_type: results
+                        title: Dernière course
+                        f1_font: true
+                        show_refresh: true
+                        hide_tracklayout: true
+                        icons:
+                          results: mdi:trophy
+                          qualifying: mdi:timer-outline
+                          sprint: mdi:flag-checkered
+                        standings:
+                          show_team: false
+                          show_teamlogo: false
+                        translations:
+                          raceheader: Course
+                          seasonheader: Saison
+                          selectseason: Choisir une saison
+                          selectrace: Choisir une course
+                          noresults: Pas de résultats
+                          driver: Pilote
+                          team: Équipe
+                          grid: Grille
+                          status: Statut
+                          point: Points
+                          nosprint: Pas de résultats
+
+                    layout:
+                      grid-template-columns: 1fr
+                      grid-auto-flow: row
+                      grid-template-areas: |
+                        "formule3"
+              card_mod:
+                class: soft-ui
+                style: |
+                  ha-card {
+                    --primary-text-color: rgb(var(--my-grey));   
+                  }
+              grid_options:
+                columns: full
+                rows: full
+            attributes:
+              label: Dernière
+          - card:
+              type: custom:button-card
+              template: frame
+              padding-bottom: 1px
+              custom_fields:
+                buttons:
+                  card:
+                    type: custom:layout-card
+                    layout_type: custom:grid-layout
+                    cards:
+                      - type: custom:formulaone-card
+                        view_layout:
+                          grid-area: formule4
+                        card_type: driver_standings
+                        title: Classement des pilotes
+                        f1_font: true
+                        standings:
+                          show_team: false
+                          show_teamlogo: false
+                        translations:
+                          points: Points
+                          wins: Gagnées
+                          team: Équipe
+                          driver: Pilote
+                    layout:
+                      grid-template-columns: 1fr
+                      grid-auto-flow: row
+                      grid-template-areas: |
+                        "formule4"
+              card_mod:
+                class: soft-ui
+                style: |
+                  ha-card {
+                    --primary-text-color: rgb(var(--my-grey));   
+                  }
+              grid_options:
+                columns: full
+                rows: full
+            attributes:
+              label: Pilotes
+          - card:
+              type: custom:button-card
+              template: frame
+              padding-bottom: 1px
+              custom_fields:
+                buttons:
+                  card:
+                    type: custom:layout-card
+                    layout_type: custom:grid-layout
+                    cards:
+                      - type: custom:formulaone-card
+                        view_layout:
+                          grid-area: formule5
+                        card_type: constructor_standings
+                        title: Classement des équipes
+                        f1_font: true
+                        standings:
+                          show_teamlogo: false
+                        translations:
+                          constructor: Équipe
+                          points: Points
+                          wins: Gagné
+                    layout:
+                      grid-template-columns: 1fr
+                      grid-auto-flow: row
+                      grid-template-areas: |
+                        "formule5"
+              card_mod:
+                class: soft-ui
+                style: |
+                  ha-card {
+                    --primary-text-color: rgb(var(--my-grey));   
+                  }
+              grid_options:
+                columns: full
+                rows: full
+            attributes:
+              label: Équipes
+          - card:
+              type: custom:button-card
+              template: frame
+              padding-bottom: 1px
+              custom_fields:
+                buttons:
+                  card:
+                    type: custom:layout-card
+                    layout_type: custom:grid-layout
+                    cards:
+                      - type: custom:formulaone-card
+                        view_layout:
+                          grid-area: formule6
+                        card_type: schedule
+                        title: Horaire
+                        date_locale: ca
+                        f1_font: true
+                        translations:
+                          date: Date
+                          race: Course
+                          location: Endroit
+                          endofseason: Fin de la saison
+                          time: Heure
+                        standings:
+                          show_team: false
+                          show_teamlogo: false
+                    layout:
+                      grid-template-columns: 1fr
+                      grid-auto-flow: row
+                      grid-template-areas: |
+                        "formule6"
+              card_mod:
+                class: soft-ui
+                style: |
+                  ha-card {
+                    --primary-text-color: rgb(var(--my-grey));   
+                  }
+              grid_options:
+                columns: full
+                rows: 6
+            attributes:
+              label: Horaire
+        layout_options:
+          grid_columns: full
+          grid_rows: full
+    column_span: 1
