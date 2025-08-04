@@ -1,0 +1,15 @@
+background: linear-gradient(90deg, #76BB40 0%, #FEFB41 20%, #FFAB01 40%, #E63B7A 60%, #982ABC 80%, #4D22B2 100%);
+
+background: linea    segments:
+      - from: 0
+        color: '#76BB40'
+      - from: 20
+        color: '#FEFB41'
+      - from: 40
+        color: '#FFAB01'
+      - from: 60
+        color: '#E63B7A'
+      - from: 80
+        color: '#982ABC'
+      - from: 100
+        color: '#4D22B2'

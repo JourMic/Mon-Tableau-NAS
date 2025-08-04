@@ -1,0 +1,191 @@
+## Tableau de bord Mon tableau HAA
+
+button_card_templates: !include Templates/button_card_templates.yaml
+decluttering_templates: !include Templates/decluttering-templates.yaml
+
+title: Mon Tableau HA
+
+sidebar:
+  width:
+    mobile: 0
+    desktop: 20
+  hideTopMenu: true
+  showTopMenuOnMobile: true
+  digitalClock: true
+  date: true
+  dateFormat: dddd DD MMMM
+  style: |
+    :host {
+      --sidebar-text-color: darkgrey;
+      --sidebar-icon-color: rgb(68, 115, 158);
+      --sidebar-selected-text-color: rgb(3, 169, 244);
+      --sidebar-selected-icon-color: rgb(3, 169, 244);
+      background-image: linear-gradient(115051deg, #000000, #151515, #1C1C1C, #2E2E2E, #424242, #585858);
+    }
+    .sidebar-inner {
+      padding: 0 !important;
+    }
+    .digitalClock {
+      font-size: 3.5em !important;
+      font-weight: bold;
+      margin-top: 5px !important;
+      text-align: center;
+    }
+    .date {
+      font-size: 1.4em !important;
+      margin-top: -0.8em !important;
+      text-align: center;
+      font-weight: bold;
+    }
+    body {
+      --ha-card-border-radius: 0 !important;
+    }
+    .sidebarMenu li {
+      font-weight: 450 !important;
+      height: 1.1em;
+      border-radius: 0 !important;
+    }
+    .sidebarMenu li ha-icon {
+      margin-top: -3px !important;
+    }
+    .sidebarMenu li.active::before {
+      border-radius: 25px !important;
+      height: 95% !important;
+      width: 90% !important;
+      top: 2px !important;
+      left: 11px !important;
+    }
+    ha-icon {
+      --mdc-icon-size: 28px;
+    }
+     
+  sidebarMenu:
+  
+    - action: navigate
+      navigation_path: /tableau-ha/Vue-Principale
+      icon:  mdi:home-account
+      active: true
+      name: Principale
+
+    - action: navigate
+      navigation_path: /tableau-ha/Vue-Eclairages
+      icon: mdi:lamps-outline
+      active: true
+      name: Éclairages
+
+    - action: navigate
+      navigation_path: /tableau-ha/Vue-Chauffages
+      icon: mdi:radiator
+      active: true
+      name: Chauffages
+
+    - action: navigate
+      navigation_path: /tableau-ha/Vue-Securites
+      icon: mdi:shield-home
+      active: true
+      name: Sécurités
+      
+    - action: navigate
+      navigation_path: /tableau-ha/Vue-Meteos
+      icon: mdi:weather-partly-lightning
+      active: true
+      name: Météo    
+
+    - action: navigate
+      navigation_path: /tableau-ha/Vue-Conditions
+      icon: mdi:home-analytics
+      active: true
+      name: Conditions
+
+    - action: navigate
+      navigation_path: /tableau-ha/Vue-F1
+      icon: mdi:flag-checkered
+      active: true
+      name: Formule Un
+
+    - action: navigate
+      navigation_path: /tableau-ha/Vue-Hydro-Quebec
+      icon: mdi:flash
+      active: true
+      name: Hydro-Québec
+      
+    - action: navigate
+      navigation_path: /tableau-ha/Vue-Piles 
+      icon: mdi:battery     
+      active: true
+      name: Piles
+
+    - action: navigate
+      navigation_path: /tableau-ha/Vue-Statuts
+      icon: mdi:list-status  
+      active: true
+      name: Statuts
+ 
+  bottomCard:
+    type: grid
+    cardOptions:
+      columns: 1
+      square: false
+      cards:
+          
+        - type: custom:clock-weather-card
+          entity: weather.pirateweather
+          forecast_rows: 5
+          locale: fr
+          hide_today_section: true
+          hide_forecast_section: false
+          show_humidity: false
+          hide_clock: true
+          hide_date: true
+          hourly_forecast: false
+          use_browser_time: false
+          show_decimal: false
+
+  #      - type: markdown
+  #        content: >-
+  
+  #          {{ state_attr('sensor.meteo_shawinigan_previsions',
+  #          'daily')[0]['text_summary'] }}
+      
+    cardStyle: |
+      :host {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+
+  template: >
+    <li>
+      {% if now().hour  < 6 %} 🌙 Bonne nuit Michel! 
+      {% elif now().hour < 12 %} 🌞 Bon matin Michel! 
+      {% elif now().hour < 18 %} 😎 Bon après-midi Michel! 
+      {% else %} 🌜 Bonne soirée Michel! {% endif %}
+    </li>
+    
+views: 
+
+  # Vues principales
+
+  - !include Vues-Pincipales/Vue-Principale.yaml
+  - !include Vues-Pincipales/Vue-Eclairages.yaml
+  - !include Vues-Pincipales/Vue-Chauffage.yaml
+  - !include Vues-Pincipales/Vue-Securite.yaml
+ 
+
+  # Vues
+
+  - !include Vues/Vue-Conditions.yaml
+  - !include Vues/Vue-Hydro-Quebec.yaml
+  - !include Vues/Vue-Meteo.yaml
+  - !include Vues/Vue-Piles.yaml
+  - !include Vues/Vue-Formule-Un.yaml
+  - !include Vues/Vue-Statut.yaml
+
+  # Sous Vues
+
+  - !include Sous-Vues/Sous-Vue-Statistiques.yaml
+  - !include Sous-Vues/Sous-Vue-Defis.yaml
+  - !include Sous-Vues/Sous-Vue-Hilo.yaml
+  - !include Sous-Vues/Sous-vue-hydro-quebec.yaml
+  - !include Sous-Vues/Sous-Vue-Pluies.yaml

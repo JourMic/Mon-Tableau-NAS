@@ -1,0 +1,379 @@
+title: Sécurité
+path: Vue-Securites
+icon: mdi:shield-home
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: custom:button-card
+        name: Caméras
+        template: titre
+      - type: heading
+        icon: mdi:home-account
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Intérieures
+      - type: heading
+        icon: mdi:tree
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Extérieures
+      - type: custom:mushroom-alarm-control-panel-card
+        card_mod:
+          style:
+            mushroom-state-info$: |
+              .container {
+                text-transform: lowercase;
+                letter-spacing: 0.4em;
+                --secondary-text-color: rgba(var(--my-grey),0.8);
+                --card-secondary-font-size: 20px;
+                --card-primary-font-size: 20px;
+              flex-direction: row !important;
+              align-items: baseline;
+              gap: 10px;
+
+              }
+            mushroom-button:nth-child(1):
+              $: |
+                .button {
+                  box-shadow: var(--my-card-shadow);
+                  --bg-color: var(--primary-background-color);
+                  --control-icon-size: 30px;
+                  width: 90px !important;
+                  height: 50px !important;                          
+                  }
+                ha-icon {
+                  --card-mod-icon-color: rgba(var(--my-blue),1);
+                }
+            mushroom-button:nth-child(2):
+              $: |
+                .button {
+                  box-shadow: var(--my-card-shadow);
+                  --bg-color: var(--primary-background-color);
+                  --control-icon-size: 30px;
+                  width: 90px !important;
+                  height: 50px !important;                          
+                  margin-left: -10px !important;
+                  }
+                ha-icon {
+                  --card-mod-icon-color: rgba(var(--my-blue),1);
+                }
+            .: |
+              ha-card {
+                background-color: transparent;
+                border: transparent;
+                padding-left: 0px !important;
+              }
+
+              ha-state-icon {
+                color: rgb(var(my-blue));
+              }
+        entity: alarm_control_panel.blink_ca_interieures
+        states:
+          - disarmed
+          - armed_away
+        primary_info: none
+        show_keypad: false
+        grid_options:
+          columns: 6
+          rows: 2
+      - type: custom:mushroom-alarm-control-panel-card
+        card_mod:
+          style:
+            mushroom-state-info$: |
+              .container {
+                text-transform: lowercase;
+                letter-spacing: 0.4em;
+                --secondary-text-color: rgba(var(--my-grey),0.8);
+                --card-secondary-font-size: 20px;
+                --card-primary-font-size: 20px;
+              flex-direction: row !important;
+              align-items: baseline;
+              gap: 10px;
+
+              }
+            mushroom-button:nth-child(1):
+              $: |
+                .button {
+                  box-shadow: var(--my-card-shadow);
+                  --bg-color: var(--primary-background-color);
+                  --control-icon-size: 30px;
+                  width: 90px !important;
+                  height: 50px !important;                          
+                  }
+                ha-icon {
+                  --card-mod-icon-color: rgba(var(--my-blue),1);
+                }
+            mushroom-button:nth-child(2):
+              $: |
+                .button {
+                  box-shadow: var(--my-card-shadow);
+                  --bg-color: var(--primary-background-color);
+                  --control-icon-size: 30px;
+                  width: 90px !important;
+                  height: 50px !important;                          
+                  margin-left: -10px !important;
+                  }
+                ha-icon {
+                  --card-mod-icon-color: rgba(var(--my-blue),1);
+                }
+            mushroom-button:nth-child(3):
+              $: |
+                .button {
+                  box-shadow: var(--my-card-shadow);
+                  --bg-color: var(--primary-background-color);
+                  --control-icon-size: 30px;
+                  width: 120px !important;
+                  height: 50px !important;
+                  margin-left: -90px !important;
+                  }
+                ha-icon {
+                  --card-mod-icon-color: rgba(var(--my-blue),1);
+                }
+            .: |
+              ha-card {
+                background-color: transparent;
+                border: transparent;
+                padding-left: 0px !important;
+              }
+
+              ha-state-icon {
+                color: rgb(var(my-blue));
+              }
+        entity: alarm_control_panel.blink_ca_exterieures
+        states:
+          - disarmed
+          - armed_away
+        primary_info: none
+        show_keypad: false
+        grid_options:
+          columns: 6
+          rows: 2
+      - type: custom:button-card
+        name: Mouvements
+        template: titre
+      - type: heading
+        icon: mdi:sofa
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Salon
+      - type: heading
+        icon: mdi:home-floor-0
+        heading: Cuisine
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+
+      - type: custom:button-card
+        entity: binary_sensor.camera_salon_mouvement
+        template: mouvements
+        name: Salon
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+      - type: custom:button-card
+        entity: binary_sensor.camera_cuisine_mouvement
+        template: mouvements
+        name: Cuisine
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+      - type: heading
+        icon: mdi:home-floor-0
+        heading: Sous-Sol
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+
+      - type: heading
+        icon: mdi:home-floor-0
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Allée
+
+      - type: custom:button-card
+        entity: binary_sensor.camera_sous_sol_mouvement
+        template: mouvements
+        name: Sous-sol
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+      - type: custom:button-card
+        entity: binary_sensor.camera_allee_mouvement
+        template: mouvements
+        name: Allée
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+      - type: heading
+        icon: mdi:gamepad-outline
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Avant
+      - type: heading
+        icon: mdi:home-floor-0
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Arrière
+      - type: custom:button-card
+        entity: binary_sensor.camera_avant_mouvement
+        template: mouvements
+        name: Galerie avant
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+      - type: custom:button-card
+        entity: binary_sensor.camera_arriere_mouvement
+        template: mouvements
+        name: Galerie Arrière
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+  - type: grid
+    cards:
+      - type: custom:button-card
+        name: Porte avant
+        template: titre
+      - type: heading
+        icon: mdi:lock-outline
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Serrure
+      - type: heading
+        icon: mdi:door
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Porte
+
+      - type: custom:button-card
+        entity: lock.porte_d_entree
+        template: serrure
+        name: Serrure
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+      - type: custom:button-card
+        entity: binary_sensor.porte_d_entree_porte
+        template: mouvements
+        name: Porte
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+      - type: custom:button-card
+        name: Fuites
+        template: titre
+      - type: heading
+        icon: mdi:toilet
+        heading: Salle d’eau
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+      - type: heading
+        icon: mdi:stove
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Cuisine
+
+      - type: custom:button-card
+        entity: binary_sensor.fuites_toilette_salle_deau_water_leak
+        template: fuites
+        name: Toilette
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+      - type: custom:button-card
+        entity: binary_sensor.fuites_lave_vaisselle_water_leak
+        template: fuites
+        name: Lave-Vaiselles
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+      - type: heading
+        icon: mdi:bathtub
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Salle de Bain
+      - type: heading
+        icon: mdi:chair-rolling
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Boudoire
+
+      - type: custom:button-card
+        entity: binary_sensor.fuites_toilette_salle_de_bains_water_leak
+        template: fuites
+        name: Toilette
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+      - type: custom:button-card
+        entity: binary_sensor.fuites_laveuse_water_leak
+        template: fuites
+        name: Laveuse
+        show_state: true
+
+        grid_options:
+          columns: 6
+          rows: 2
+      - type: heading
+        icon: mdi:water-boiler
+        heading_style: title
+        grid_options:
+          columns: 12
+          rows: 0.4
+        heading: Sous-Sol
+
+      - type: custom:button-card
+        entity: binary_sensor.fuites_chauffe_eau_water_leak
+        template: fuites
+        name: Chauffe eau
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2

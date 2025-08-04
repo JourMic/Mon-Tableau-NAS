@@ -1,0 +1,176 @@
+title: Météo
+path: Vue-Meteos
+icon: mdi:weather-partly-lightning
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 3
+cards: []
+sections:
+  - type: grid
+    cards:
+
+      - type: heading
+        heading_style: title
+        icon: mdi:weather-partly-snowy-rainy
+        heading: Prévisions
+        grid_options:
+          columns: full
+          rows: 0.3
+
+      - !include ..//Cartes/Carte-Meteo.yaml
+      
+  - type: grid
+    cards:   
+      - type: heading
+        heading_style: title
+        icon: di:eye
+        heading: Observations
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - !include ..//Cartes/Carte-Meteo-Observations.yaml
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Carte
+        heading_style: title
+        icon: mdi:map
+        entities:
+          - show_state: true
+            show_icon: true
+            entity: weather.shawinigan_previsions
+            color: red
+        grid_options:
+          columns: full
+          rows: 0.5
+            
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:layout-card
+              layout_type: custom:grid-layout
+              cards:
+                - type: custom:weather-radar-card
+                  view_layout:
+                    grid-area: Meteo2
+                  map_style: Satellite
+                  data_source: RainViewer-TWC
+                  show_recenter: false
+                  square_map: false
+                  show_marker: true
+                  show_scale: true
+                  show_playback: false
+                  show_range: false
+                  extra_labels: false
+                  zoom_level: 7
+              layout:
+                grid-template-columns: 1fr
+                grid-auto-flow: row
+                grid-template-areas: |
+                  "Meteo2"
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 12
+          rows: full
+            
+badges:
+
+  - type: custom:mushroom-template-badge
+    content: |-
+          Jour:🔻{{ states('sensor.minmax_temperature_min_jour') }} °C
+          🔺{{ states('sensor.minmax_temperature_max_jour') }} °C
+    color: red
+    icon: ''
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: IQA
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Min-Max-Jour.yaml
+  - type: custom:mushroom-template-badge
+    content: |-
+          Mois:🔻{{ states('sensor.minmax_temperature_min_mois') }} °C
+          🔺{{ states('sensor.minmax_temperature_max_mois') }} °C
+    color: red
+    icon: ''
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: IQA
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Min-Max-Mois.yaml
+  - type: custom:mushroom-template-badge
+    content: |-
+          Tout🔻{{ states('sensor.minmax_temperature_minimum') }} °C
+          🔺{{ states('sensor.minmax_temperature_maximum') }} °C
+    color: red
+    icon: ''
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: IQA
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Min-Max.yaml
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    color: ""
+    entity: sensor.tempest_st_00032986_voltage
+    name: Pile Tempest
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Statut de la station météo Tempest
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Tempest.yaml
+ 
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    color: orange
+    entity: sensor.tempest_st_00032986_lightning_count_today
+    name: Éclaires
+    visibility:
+      - condition: state
+        entity: sensor.tempest_st_00032986_lightning_count_today
+        state_not: "0"
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Nombre et distance des éclaires
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Eclaires.yaml
+              
